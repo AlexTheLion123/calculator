@@ -1,4 +1,4 @@
-const buttonArray = [7,8,9,"DEL","AC",4,5,6,"x","/",1,2,3,"+","-",0,".","^","Ans","="];
+const buttonArray = [7,8,9,"DEL","AC",4,5,6,"x","/",1,2,3,"+","-",0,".","^","ANS","="];
 const operators = ["x","/","+","-","^"];
 const numbers = [1,2,3,4,5,6,7,8,9,0];
 const funcKeys = ["DEL","AC","ANS","="]
@@ -47,9 +47,12 @@ const answerOutput = document.querySelector(".answerOutput");
 buttonList.forEach(element => {
     element.addEventListener('click', e => {
         const val = e.target.innerText;
-        if(anyMemory = "="){
+
+        if(anyMemory == "=" || anyMemory == "DEL"){
             anyMemory = val;
-            answerOutput.textContent = '';
+            if(val!="DEL"){
+                answerOutput.textContent = '';
+            }
         }
 
 
@@ -60,24 +63,31 @@ buttonList.forEach(element => {
         }
 
         if(operators.includes(val)){
-            operatorMemory = val;
             newMemory = output.textContent;
             oldMemory = memory.textContent;
-
+            
             if(!newMemory) {
-                console.log("Enter a number first");
-                return;
+                if(!ans){
+                    console.log("Enter a number first");
+                    return;
+                } else {
+                    oldMemory = ans;
+                    memory.textContent = oldMemory;
+                    operatorMemory = val;
+                    return;
+                }
             };
-
+            
             // if there is nothing in memory, it is first in memory, if there is something in memory, call the operator
-            memory.textContent = oldMemory ? operate(val, parseInt(oldMemory), parseInt(newMemory)) : newMemory;        
+            memory.textContent = oldMemory ? operate(operatorMemory, parseInt(oldMemory), parseInt(newMemory)) : newMemory;        
+            operatorMemory = val;
             
             digitMemory = '';
             output.textContent = '';
             return;        
         }
 
-        if(val === "="){
+        if(val == "="){
             newMemory = output.textContent;
             oldMemory = memory.textContent;
             if(!newMemory){ // nothing typed in output
@@ -85,8 +95,7 @@ buttonList.forEach(element => {
                 return;
             }
             if(!oldMemory){ // if there is nothing in memory, ans in the new number
-                ans = newMemory;
-                answerOutput.textContent = ans;
+                answerOutput.textContent = newMemory;
             }
             if(oldMemory && newMemory){ // if both oldMemory and newMemory exist, operate and put the answer in the ans box
                 answerOutput.textContent = operate(operatorMemory, parseInt(oldMemory), parseInt(newMemory)); 
@@ -104,8 +113,24 @@ buttonList.forEach(element => {
         }
 
         if(val == "DEL"){
+            if(!digitMemory){
+                console.log("Nothing to delete");
+            }
             digitMemory = digitMemory.slice(0,-1);
             output.textContent = digitMemory;
+            return;
+        }
+
+        if(val == "ANS"){
+            if(!ans){
+                console.log("No previous answer in memory");
+                return;
+            }
+            
+            output.textContent = ans;
+            newMemory = ans;
+
+            return; 
         }
     })
 });
