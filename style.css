@@ -57,12 +57,31 @@ body{
 
 .output {
     background: yellow;
-    height: 50px;
-    width: 100px;
+    height: 60px;
+    width: 200px;
     position: absolute;
     bottom: 0;
     right: 0;
     overflow: hidden;
+}
+
+.memory {
+    background: brown;
+    height: 60px;
+    width: 200px;
+    position: absolute;
+    right: 0px;
+}
+
+.answerOutput {
+    height: 120px;
+    background: green;
+    width: 150px;
+    position: absolute;
+    left: 0px;
+}
+
+.numberDisplay {
     display: flex;
     justify-content: center;
     align-items: center;
