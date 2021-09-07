@@ -56,16 +56,18 @@ buttonList.forEach(element => {
         }
 
 
-        if(numbers.includes(parseInt(val))){
+        if(numbers.includes(parseInt(val)) || val == "."){
             digitMemory += val;
             output.textContent = digitMemory;
+            anyMemory = val;
             return;
         }
 
         if(operators.includes(val)){
             newMemory = output.textContent;
             oldMemory = memory.textContent;
-            
+            anyMemory = val;
+
             if(!newMemory) {
                 if(!ans){
                     console.log("Enter a number first");

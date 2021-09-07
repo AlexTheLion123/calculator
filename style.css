@@ -63,6 +63,8 @@ body{
     bottom: 0;
     right: 0;
     overflow: hidden;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
 }
 
 .memory {
@@ -71,6 +73,7 @@ body{
     width: 200px;
     position: absolute;
     right: 0px;
+    border-left: 1px solid grey;
 }
 
 .answerOutput {
@@ -79,10 +82,13 @@ body{
     width: 150px;
     position: absolute;
     left: 0px;
+    border-right: 1px solid white;
 }
 
 .numberDisplay {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: rgb(58, 245, 58);
+    background: black;
 }
