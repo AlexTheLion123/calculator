@@ -104,7 +104,8 @@ buttonList.forEach(element => {
         }
 
         if(val == "DEL"){
-
+            digitMemory = digitMemory.slice(0,-1);
+            output.textContent = digitMemory;
         }
     })
 });
